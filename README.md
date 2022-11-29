@@ -10,5 +10,5 @@ Application made in Java for project on my college.<br>
 <hr>
 <b>Done:</b>
 <ul>
-<li>In progress...
+<li><u>added Java classes for entry</u>
 </ul>
