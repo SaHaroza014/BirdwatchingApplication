@@ -1,14 +1,14 @@
 package entiteti;
 
-public class IstrazivacUnos {
+public non-sealed class IstrazivacUnos implements Istrazivac{
     private String ime;
     private String prezime;
     private String institucija;
-    private Integer broj;
+    private Double broj;
 
     private BirdUnos[] zapazanja;
 
-    public IstrazivacUnos(String ime, String prezime, String institucija, Integer broj, BirdUnos[] zapazanja) {
+    public IstrazivacUnos(String ime, String prezime, String institucija, Double broj, BirdUnos[] zapazanja) {
         this.ime = ime;
         this.prezime = prezime;
         this.institucija = institucija;
@@ -40,11 +40,22 @@ public class IstrazivacUnos {
         this.institucija = institucija;
     }
 
-    public Integer getBroj() {
+    public Double getBroj() {
         return broj;
     }
 
-    public void setBroj(Integer broj) {
+    public void setBroj(Double broj) {
         this.broj = broj;
+    }
+
+    @Override
+    public int countUnos(IstrazivacUnos ist) {
+        int countSve = 0;
+        for(int i = 0; i < ist.zapazanja.length;i++){
+            if(ist.zapazanja[i].getBrojnost()>0){
+                countSve++;
+            }
+        }
+        return countSve;
     }
 }

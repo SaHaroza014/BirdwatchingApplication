@@ -13,7 +13,7 @@ public enum Nomenklatura {
     cesljugar("Carduelis carduelis"),
     zelendur("Carduelic chloris"),
     vrabac("Passer domesticus"),
-    polsjki_vrabac("Passer montanus"),
+    poljski_vrabac("Passer montanus"),
     golub_grivnjas("Columba palumbus");
 
     private String vrsta;
