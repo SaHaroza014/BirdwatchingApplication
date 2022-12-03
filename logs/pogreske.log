@@ -1,0 +1,28 @@
+2022-12-03 14:21:03,641 INFO [main] g.Glavna [Glavna.java:20] Program je uspjesno pokrenut!
+2022-12-03 14:50:14,489 INFO [main] g.Glavna [Glavna.java:21] Program je uspjesno pokrenut!
+2022-12-03 15:01:26,816 INFO [main] g.Glavna [Glavna.java:21] Program je uspjesno pokrenut!
+2022-12-03 15:01:59,381 INFO [main] g.Glavna [Glavna.java:21] Program je uspjesno pokrenut!
+2022-12-03 15:03:04,604 INFO [main] g.Glavna [Glavna.java:21] Program je uspjesno pokrenut!
+2022-12-03 15:06:34,643 INFO [main] g.Glavna [Glavna.java:21] Program je uspjesno pokrenut!
+2022-12-03 15:07:12,380 INFO [main] g.Glavna [Glavna.java:21] Program je uspjesno pokrenut!
+2022-12-03 15:13:54,538 INFO [main] g.Glavna [Glavna.java:21] Program je uspjesno pokrenut!
+2022-12-03 15:14:02,286 INFO [main] g.Glavna [Glavna.java:48] null
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextDouble(Scanner.java:2569)
+	at glavna.Glavna.main(Glavna.java:44)
+2022-12-03 15:14:08,898 INFO [main] g.Glavna [Glavna.java:48] null
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextDouble(Scanner.java:2569)
+	at glavna.Glavna.main(Glavna.java:44)
+2022-12-03 15:16:22,005 INFO [main] g.Glavna [Glavna.java:21] Program je uspjesno pokrenut!
+2022-12-03 15:16:29,997 INFO [main] g.Glavna [Glavna.java:49] null
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextDouble(Scanner.java:2569)
+	at glavna.Glavna.main(Glavna.java:44)
+2022-12-03 15:16:34,864 INFO [main] g.Glavna [Glavna.java:45] unesena je vrijdenost: 9.812575667E9

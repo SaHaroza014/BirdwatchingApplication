@@ -1,13 +1,12 @@
 package entiteti;
 
-public class BirdUnos extends VrstaZnacajke implements Analiza{
+public class BirdUnos extends VrstaZnacajke{
     private String nazivLatinski;
     private String nazivHrvatski;
     private Integer brojnost;
     private String spol;
 
-
-    public BirdUnos(String nazivLatinski, String nazivHrvatski, Integer brojnost, String spol, String kategorija) {
+    public BirdUnos(String nazivLatinski, String nazivHrvatski, Integer brojnost, String spol, int kategorija) {
         super(kategorija);
         this.nazivLatinski = nazivLatinski;
         this.nazivHrvatski = nazivHrvatski;
@@ -53,27 +52,4 @@ public class BirdUnos extends VrstaZnacajke implements Analiza{
         System.out.println("Zabiljezeno je: ");
     }
 
-    @Override
-    public int[] countGender(BirdUnos[] b) {
-        int[] container = new int[3];
-        int countM = 0;
-        int countF = 0;
-        int countU = 0;
-
-        for(int i = 0; i < b.length; i ++){
-            if(b[i].getSpol().equals("M")){
-                countM++;
-                container[0] = countM;
-            }
-            else if(b[i].getSpol().equals("F")){
-                countF++;
-                container[1] = countF;
-            }
-            else{
-                countU++;
-                container[2] = countU;
-            }
-        }
-        return container;
-    }
 }
