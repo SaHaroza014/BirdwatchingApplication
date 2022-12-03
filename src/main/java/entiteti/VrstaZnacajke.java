@@ -7,18 +7,18 @@ package entiteti;
  */
 
 public abstract class VrstaZnacajke {
-    public String kategorija;
+    public int kategorija;
     public String ugrozenost;
     public Integer zadnjaGodina;
 
-    public VrstaZnacajke(String kategorija) {
+    public VrstaZnacajke(int kategorija) {
     }
 
-    public String getKategorija() {
+    public int getKategorija() {
         return kategorija;
     }
 
-    public void setKategorija(String kategorija) {
+    public void setKategorija(int kategorija) {
         this.kategorija = kategorija;
     }
 
