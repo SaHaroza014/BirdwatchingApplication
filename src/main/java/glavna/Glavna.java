@@ -8,8 +8,11 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import iznimke.NeispravanUnos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.swing.plaf.nimbus.NimbusStyle;
 
 
 public class Glavna {
@@ -42,61 +45,131 @@ public class Glavna {
                 try{
                     System.out.print("Unesite telefonski broj istrazivaca: "); // dodati da broj ne moze biti dulji/kraci od fiksne vrijednosti
                     broj = myObj.nextDouble();
-                    logger.info("unesena je vrijdenost: " + broj);
+                    logger.info("Unesena je vrijdenost: " + broj);
                     tocno=false;
                 }
                 catch(InputMismatchException e){
                     logger.info(e.getMessage(),e);
-                    System.out.println("Unesena je pogresna vrijednost!");
+                    System.out.println("Unesena je pogresna vrijednost za telefonski broj!");
                 }
                 myObj.nextLine();
             }
 
-            System.out.print("Za koliko lokacija zelite unijeti nalaze? (min. 1): ");
-            int lokNum = myObj.nextInt();
-            Lokalitet[] lokaliteti = new Lokalitet[lokNum];
+            boolean tocno2 = true;
+            int lokalitetiNum = 1;
+            while (tocno2){
+                try{
+                    System.out.print("Za koliko lokacija zelite unijeti nalaze? (min. 1): ");
+                    lokalitetiNum = myObj.nextInt();
+                    logger.info("Unesen broj za lokalitete je: " + lokalitetiNum);
+                    tocno2=false;
+                } catch (InputMismatchException e){
+                    logger.info(e.getMessage(), e);
+                    System.out.println("Unesena je pogresna vrijednost za broj lokaliteta!");
+                }
+                myObj.nextLine();
+            }
+            Lokalitet[] lokaliteti = new Lokalitet[lokalitetiNum];
             BirdUnos[] unosi = new BirdUnos[0];
             for (int l = 0; l < lokaliteti.length; l++) {
-                System.out.print("Unesite naziv " + (l+1) + ". lokacije: ");
-                myObj.nextLine();
+                System.out.print("Unesite naziv " + (l + 1) + ". lokacije: ");
+//                myObj.nextLine();
                 String nazivL = myObj.nextLine();
-                System.out.print("Unesite datum istrazivanja: ");
-                String datumL = myObj.nextLine();
-                Date date1 = new SimpleDateFormat("dd.MM.yyyy.").parse(datumL);
+
+                boolean tocno3 = true;
+                Date date2 = null;
+                while (tocno3) {
+                    try {
+                        System.out.print("Unesite datum istrazivanja (dd.mm.yyyy.): ");
+                        String datumL = myObj.nextLine();
+                        date2 = new SimpleDateFormat("dd.MM.yyyy.").parse(datumL);
+                        logger.info("Unesen je datum: " + date2);
+                        tocno3=false;
+                    } catch (ParseException e) {
+                        logger.info(e.getMessage(), e);
+                        System.out.println("Unesena je pogresna vrijednost datuma!");
+                    }
+                }
+
+                Date date1 = date2;
 
                 int numObservation = 0;
                 //kasnije napraviti da se unosi dok se ne unese odredjeni znak (ili tome nesto slicno)
-                System.out.print("Koliko zelite unijeti opservacija? (min. 5): ");
-                numObservation = myObj.nextInt();
+                boolean tocno4 = true;
+                while(tocno4){
+                    try{
+                        System.out.print("Koliko zelite unijeti opservacija? (min. 5): ");
+                        numObservation = myObj.nextInt();
+                        tocno4=false;
+                    }catch (InputMismatchException e){
+                        logger.info(e.getMessage(), e);
+                        System.out.println("Unesena je pogesna vrijednost za broj unosa!");
+                    }
+                    myObj.nextLine();
+                }
+                String nazivZnanstveni = null;
+                String nazivHrvatski = null;
                 unosi = new BirdUnos[numObservation];
-                myObj.nextLine();
                 //unosi opservacija
                 for (int u = 0; u < unosi.length; u++) {
                     // program za konvert " " u "_":
                     System.out.println("<<--------------------------------------->>");
-                    System.out.print("Unesite hrvatski naziv ptice: ");
-                    String nazivHrvatski = myObj.nextLine();
-                    String naziv2 = Character.toLowerCase(nazivHrvatski.charAt(0)) + nazivHrvatski.substring(1)
-                            .replaceAll(" ", "_").toLowerCase();
 
-                    Nomenklatura test = Nomenklatura.valueOf(naziv2);
-                    // trazi po enum postoji li uneseni 'hrvatski naziv ptice' kako bi se dodao znanstveni naziv
-                    // kasnije dodati Exception koji javlja da nije dobro uneseno, tj. da se pokusa ponovno...
-                    //i ako je vec unesena vrsta da se ne moze unijeti opet u istom sessionu unosa...
-                    String nazivZnanstveni = null;
-                    for (Nomenklatura nom : Nomenklatura.values()) {
-                        if (nom.equals(test)) {
-                            nazivZnanstveni = nom.getVrsta();
+                    boolean tocno5 = true;
+                    while(tocno5){
+                        try{
+                            System.out.print("Unesite hrvatski naziv ptice: ");
+                            nazivHrvatski = myObj.nextLine();
+                            String naziv2 = Character.toLowerCase(nazivHrvatski.charAt(0)) + nazivHrvatski.substring(1)
+                                    .replaceAll(" ", "_").toLowerCase();
+                            Nomenklatura test = Nomenklatura.valueOf(naziv2);
+                            // trazi po enum postoji li uneseni 'hrvatski naziv ptice' kako bi se dodao znanstveni naziv
+                            // kasnije dodati Exception koji javlja da nije dobro uneseno, tj. da se pokusa ponovno...
+                            //i ako je vec unesena vrsta da se ne moze unijeti opet u istom sessionu unosa...
+                            nazivZnanstveni = null;
+                            for (Nomenklatura nom : Nomenklatura.values()) {
+                                if (nom.equals(test)) {
+                                    nazivZnanstveni = nom.getVrsta();
+                                }
+                            }
+                            tocno5 = false;
+                        } catch (IllegalArgumentException e){
+                            logger.info(e.getMessage(),e);
+                            System.out.println("Unesena je nepostojeca vrijednost za vrstu!");
                         }
+//                        myObj.nextLine();
                     }
-                    System.out.print(">> Unesite brojnost: ");
-                    Integer brojnost = myObj.nextInt();
-                    myObj.nextLine();
-                    System.out.print(">> Unesite spol vrste (M/F/U): ");
-                    String spol = myObj.nextLine().toUpperCase();
+
+                    boolean tocno6=true;
+                    int brojnost = 0;
+                    while(tocno6){
+                        try{
+                            System.out.print(">> Unesite brojnost: ");
+                            brojnost = myObj.nextInt();
+                            tocno6=false;
+                        }catch (InputMismatchException e){
+                            logger.info(e.getMessage(), e);
+                            System.out.println("Unesena je pogesna vrijednost za brojnost!");
+                        }
+                        myObj.nextLine();
+                    }
+
+                    boolean tocno7=true;
+                    String spol = null;
+                    while(tocno7){
+                        try{
+                            System.out.print(">> Unesite spol vrste (M/F/U): ");
+                            spol = myObj.nextLine().toUpperCase();
+                            unesiSpol(spol);
+                            tocno7=false;
+                        }catch (NeispravanUnos e){
+                            System.out.println("Nemam pojma");
+                        }
+//                        myObj.nextLine();
+                    }
                     System.out.println(">> Odaberite kategoriju vrste: ");
-                    for(int kat=0; kat < kategorije.length;kat++){
-                        System.out.println((kat+1) + ".) " + kategorije[kat]);
+                    for (int kat = 0; kat < kategorije.length; kat++) {
+                        System.out.println((kat + 1) + ".) " + kategorije[kat]);
                     }
                     System.out.print("Odabir: ");
                     int kategorija = myObj.nextInt();
@@ -127,6 +200,13 @@ public class Glavna {
                     .setBroj(broj)
                     .setLokaliteti(lokaliteti)
                     .createIstrazivacUnos();
+        }
+    }
+    private static void unesiSpol(String spol) throws NeispravanUnos{ //unchecked exception
+        if(!spol.equals("M")){
+            throw new NeispravanUnos("Fucked up mate");
+        } else{
+            System.out.println("Sve je ok!");
         }
     }
 }
